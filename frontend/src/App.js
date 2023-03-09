@@ -14,15 +14,17 @@ import Activate from "./pages/activate/Activate"
 import userEvent from "@testing-library/user-event"
 import Rooms from "./pages/Rooms/Rooms"
 import { useSelector } from "react-redux"
+import { useState } from "react"
+import { useLoadingWithRefresh } from "./hooks/useLoadingWithRefresh"
+import Loader from './components/shared/Loader/Loader'
 
-// const isAuth = false
-// const user = {
-//   activated: false,
-// }
 let location = useLocation
 
 function App() {
-  return (
+  const { loading } = useLoadingWithRefresh()
+  return loading ? (
+    <Loader message='Loading, please wait....'/>
+  ) : (
     <BrowserRouter>
       <Navigation />
       <Routes>
